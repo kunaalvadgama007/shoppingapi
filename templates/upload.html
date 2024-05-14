@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333333;
+        }
+        form {
+            text-align: center;
+            position: relative; /* Added */
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .custom-file-upload {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+        #image-preview {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #submit-button {
+            display: none;
+            margin: 20px auto 0; /* Centered */
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #submit-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image</h1>
+        <form method="POST" enctype="multipart/form-data" id="upload-form">
+            <label for="image-upload" class="custom-file-upload">Choose File</label>
+            <input type="file" id="image-upload" name="image" accept="image/*">
+            <div id="image-preview"></div>
+            <button type="button" id="submit-button">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('image-upload').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.createElement('img');
+                img.src = event.target.result;
+                document.getElementById('image-preview').innerHTML = '';
+                document.getElementById('image-preview').appendChild(img);
+                document.getElementById('submit-button').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('submit-button').addEventListener('click', function() {
+            document.getElementById('upload-form').submit();
+        });
+    </script>
+</body>
+</html>

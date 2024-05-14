@@ -3,30 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Image</title>
+    <title>Google Shopping</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(23, 24, 28);
             margin: 0;
             padding: 0;
+            color: #f1f1f1;
+        }
+        .navbar {
+            background-color: rgb(35,36,40);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .navbar img {
+            height: 70px;
+            width: auto;
+            margin-right: 20px;
+            cursor: pointer;
         }
         .container {
             max-width: 500px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #2b2c34;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
         h1 {
             text-align: center;
             margin-bottom: 30px;
-            color: #333333;
+            color: #e6e6e6;
+            font-size: 24px;
         }
         form {
             text-align: center;
-            position: relative; /* Added */
+            position: relative;
         }
         input[type="file"] {
             display: none;
@@ -48,14 +63,14 @@
             margin-top: 20px;
         }
         #image-preview img {
-            max-width: 100%;
-            max-height: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            max-width: 100%; /* Ensure the image doesn't exceed its container */
+            max-height: 300px; /* Limit the height of the image */
+            border: 2px solid #ccc;
+            border-radius: 10px;
         }
         #submit-button {
             display: none;
-            margin: 20px auto 0; /* Centered */
+            margin: 20px auto 0;
             background-color: #28a745;
             color: #ffffff;
             border: none;
@@ -70,6 +85,11 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+    <a href="https://aiinterior.netlify.app/">
+        <img src="/static/Ainterior.png" alt="AI Interior">
+    </a>
+    </div>
     <div class="container">
         <h1>Upload an Image</h1>
         <form method="POST" enctype="multipart/form-data" id="upload-form">
@@ -87,6 +107,8 @@
             reader.onload = function(event) {
                 var img = document.createElement('img');
                 img.src = event.target.result;
+                img.style.maxWidth = "100%"; // Ensure the image doesn't exceed its container
+                img.style.height = "auto"; // Maintain aspect ratio
                 document.getElementById('image-preview').innerHTML = '';
                 document.getElementById('image-preview').appendChild(img);
                 document.getElementById('submit-button').style.display = 'block';
